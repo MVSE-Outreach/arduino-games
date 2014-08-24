@@ -1,0 +1,11 @@
+
+Equipment List for Digi-Makers Arduino Tutorial
+-------------------------------------------------------------------------------
+
+1. Arduino Board - Leonardo or Uno model
+2. A Laptop with the arduino software installed
+3. USB-A to B cable to connect the laptop and arduino
+4. An LCD screen module
+5. Lots of wires for connecting everything up
+6. A solderless breadboard to build the circuit on
+7. Buttons, LEDS and assorted components

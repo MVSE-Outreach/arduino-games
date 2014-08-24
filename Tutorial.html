@@ -1,0 +1,550 @@
+<html>
+<head>
+<title>Arduino Tutorial's | Digi-Makers</title>
+
+	<style type="text/css">
+		body
+		{
+			max-width:900px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 0px;
+			margin-bottom :0px;
+			border-right: 2px ridge #EEEEEE;
+			border-left: 2px ridge #EEEEEE;
+			padding: 5px;
+			background-color: white;
+			font:large arial,sans-serif;
+		}
+		h1{color: orange;}
+		p{ text-indent: 15px;}
+		.section-title
+		{
+			font-size:1.5em;
+			color: orange;
+			margin-right:5px;
+			margin-bottom:5px;
+			font-weight: bold;
+		}
+		li{margin-bottom: 5px;}
+		.img-inline-box
+		{
+			border: 1px solid gray;
+			border-radius: 10px;
+			margin:5px;
+			max-width: 50%;
+			float:right;
+			text-align: center;
+			font-size: small;
+		}
+		.title-box
+		{
+			display: inline-block;
+			width:22%;
+			margin:5px;
+			border: 1px solid #AAAAAA;
+			border-radius: 10px;
+			padding:5px;
+			text-align: center;
+			vertical-align: middle;
+			color:orange;
+			font-weight: bold;
+			height: 2.0em;
+		}
+		.title-box:hover
+		{
+			color:white;
+			background-color: #6666FF;
+		}
+		.code-block
+		{
+			border: 2px solid gray;
+			background-color: black;
+			padding:3px;
+			padding-top: 3px;
+			margin-top: 0px;
+			border-radius: 5px;
+			font-size: smaller;
+			color:white;
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 80%;
+		}
+	</style>
+
+</head>
+
+<body>
+	<h1>
+		<img src="logos/digimakers.jpg" style="float:left; height:1.5em; margin-right:10px;" />
+		<img src="logos/arduino_community_logo.png" style="float:right; height:1.5em;" />
+		&nbsp;Digi-makers Arduino Tutorial
+		<hr/>
+	</h1>
+	<p>
+		<div class="section-title">Introduction</div>
+		&nbsp; Welcome! This tutorial will teach you how to use the wonderful Arduino modeling
+		platform to create all sorts of electronic contraptions and games. This tutorial is aimed at those
+		attending the Digi-makers@bristol events, however if you have the kit needed then the tutorial
+		will be just as useful. Teachers are more than welcome to use it as materials in class as well.
+	</p>
+	<div class="img-inline-box" style="width:30%;">
+		<img src="pictures/leonardo.jpg" style="width:90%;"/><br/>
+		Arduino Leonardo Board
+	</div>
+	<p>
+		First things first, <b>you will need:</b>
+		<ol>
+			<li>
+			A Laptop / PC of your own with the
+			 <a target="_blank" href="http://arduino.cc/en/Main/Software#toc1">arduino software</a>
+			installed. We will help you with this at the event.
+			</li>
+			<li>
+				An Arduino Board! We will be using the 
+				<a href="http://arduino.cc/en/Main/ArduinoBoardLeonardo">Leonardo</a> 
+				model, but an older
+				<a href="http://arduino.cc/en/Main/ArduinoBoardUno" target="_blank">Uno board</a> will work fine too. These will be provided at the event, along with the cables 
+				needed to connect them to your computer.
+			</li>
+			<li>
+			An arduino compatible LCD screen module. Again, we will provide these at the event. However
+			if you are doing this at home the module we are using can be found 
+			<a target="_blank" href="http://uk.rs-online.com/web/p/processor-microcontroller-development-kits/7824585/">here</a>.
+			</li>
+			<li>
+				Any other components you can easily get your hands on, the more the merrier!
+				You will need wires to connect things up and a breadboard to attach everything
+				to, but we will provide these at the event. A breadboard is a special sort of circuit
+				board that you can re-arange the components on without needing solder, very good
+				for hobby work!
+			</li>
+		</ol>
+		Have a look below for what we are going to make!
+	</p>
+	<hr/>
+
+	<p>
+		<a id="buttons"></a><div class="section-title">Pushing Buttons</div>
+		
+		First off, we are going to connect up some buttons and make some lights flash. Copy the code
+		below into your Arduino IDE first. Then, use the diagram below to build the circuit. Don't be
+		affraid to ask about the circuit. Better to get it right than blow something up! Remember,
+		you don't need to copy the grey bits or anything after a "//". Those are just comments to help
+		you understand the code more easily.<br/>
+
+		<pre class="code-block">
+<span style="color: #7E7E7E;">//&nbsp;Here&nbsp;we&nbsp;define&nbsp;which&nbsp;pins&nbsp;are&nbsp;which</span>
+#define&nbsp;BUTTON_PIN&nbsp;5
+#define&nbsp;LED_PIN&nbsp;13
+
+<span style="color: #7E7E7E;">/*</span>
+<span style="color: #7E7E7E;">&nbsp;&nbsp;This&nbsp;function&nbsp;runs&nbsp;once&nbsp;when&nbsp;you&nbsp;first&nbsp;turn&nbsp;the&nbsp;Arduino&nbsp;on.&nbsp;</span>
+<span style="color: #7E7E7E;">&nbsp;&nbsp;It&nbsp;sets&nbsp;up&nbsp;which&nbsp;pins&nbsp;we&nbsp;are&nbsp;going&nbsp;to&nbsp;use&nbsp;for&nbsp;inputs&nbsp;and&nbsp;outputs.</span>
+<span style="color: #7E7E7E;">&nbsp;*/</span>
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>setup</b></span>()
+{
+&nbsp;&nbsp;<span style="color: #CC6600;">pinMode</span>(BUTTON_PIN, <span style="color: #006699;">INPUT</span>);
+&nbsp;&nbsp;<span style="color: #CC6600;">pinMode</span>(LED_PIN, <span style="color: #006699;">OUTPUT</span>);
+}
+
+<span style="color: #7E7E7E;">/*</span>
+<span style="color: #7E7E7E;">&nbsp;&nbsp;After&nbsp;the&nbsp;setup&nbsp;function&nbsp;finishes,&nbsp;this&nbsp;one&nbsp;loops&nbsp;round&nbsp;and&nbsp;round&nbsp;</span>
+<span style="color: #7E7E7E;">&nbsp;&nbsp;until&nbsp;we&nbsp;turn&nbsp;the&nbsp;Arduino&nbsp;off&nbsp;again.</span>
+<span style="color: #7E7E7E;">&nbsp;*/</span>
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>loop</b></span>()
+{
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Check if the buttons are pressed. This is how you check if any</span>
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// pin is turned on.</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">int</span> button1 = <span style="color: #CC6600;">digitalRead</span>(BUTTON_PIN);
+
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// if it is pressed, turn on light number 1</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">if</span>(button1 == <span style="color: #006699;">HIGH</span>)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">// This is how we turn a pin on. We call turning it on "setting it high"</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">digitalWrite</span>(LED_PIN, <span style="color: #006699;">HIGH</span>);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #CC6600;">else</span>
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">// Again, this is how we turn a pin off. Called "setting it low"</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">digitalWrite</span>(LED_PIN, <span style="color: #006699;">LOW</span>);
+&nbsp;&nbsp;}
+}</pre>
+
+	Now that you have the code all written, it is time to build the circuit. Use the diagram below to build
+	it, and the photo for comparison when you finish. Ask for help if you aren't sure!
+    <br/> Also, remember to put the longer pin of the LED the right way round!
+
+    <div style="text-align:center;">
+		<img src="pictures/lights_bb.png" style="width:60%;"/>
+        </div>
+	</p>
+	
+	<p>Once you have the code ready, save it somewhere and program your arduino! Make sure it is plugged in, then click on the "Upload" button and observe your handwork!</p>
+
+	<hr/>
+
+	<p>
+		<a id="screen"></a><div class="section-title">Using the Screen</div>
+		Right. Now the really fun part! What you do here is mostly up to you, all I am going to do is
+		give you a few examples of what you can do with the screen. There will be prizes for good 
+		drawings, so get creative!
+
+    <div><div class="img-inline-box" style="float:left; max-width: 48%;">
+        <img src="pictures/etch-a-sketch_bb.png" style="width:95%;"/>
+    </div>
+    <div class="img-inline-box" style="float:right; max-width: 48%;">
+        <img src="pictures/screen_demo.jpg" style="width:95%;"/>            
+    </div>
+<p>..</p>
+
+		<ul>
+			<li style="font-weight:bold; color: orange;">Getting started</li>
+			Whever you program the screen, always start with this template code. You will need it
+			every time you use the screen, so copy and paste it if you like.
+			<pre class="code-block">
+<span style="color: #7E7E7E;">//&nbsp;These&nbsp;two&nbsp;files&nbsp;contain&nbsp;everything&nbsp;the&nbsp;arduino&nbsp;needs&nbsp;to&nbsp;talk&nbsp;to&nbsp;the&nbsp;screen.</span>
+#include&nbsp;&lt;<span style="color: #CC6600;">SPI</span>.h&gt;
+#include&nbsp;&lt;<span style="color: #CC6600;">TFT</span>.h&gt;
+
+<span style="color: #7E7E7E;">//&nbsp;create&nbsp;an&nbsp;instance&nbsp;of&nbsp;the&nbsp;library</span>
+<span style="color: #CC6600;">TFT</span> screen = <span style="color: #CC6600;">TFT</span>(7, 0, 1);
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>setup</b></span>() {
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// initialize the screen</span>
+&nbsp;&nbsp;screen.<span style="color: #CC6600;">begin</span>();
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// In this function we put everything that we only want to draw once.</span>
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// For example, make the background white:</span>
+&nbsp;&nbsp;screen.background(255,255,255);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Add more stuff down here....</span>
+}
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>loop</b></span>() {
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Set the text color, in this case black.</span>
+&nbsp;&nbsp;screen.stroke(0,0,0);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Set how big the text should be. 1 = 10 pixels, 2 = 20 pixels etc...</span>
+&nbsp;&nbsp;screen.setTextSize(2);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Write some text at position (X, Y)</span>
+&nbsp;&nbsp;screen.text(<span style="color: #006699;">"Hello World!"</span>, 10, 20);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Add more stuff down here...</span>
+}
+
+</pre>
+
+			<li style="font-weight:bold; color: orange;">Drawing Shapes</li>
+			The most basic thing you can do is draw shapes like rectangles, circles and lines.
+			See if you can draw a little stick man or something. Try putting some of these in
+			the setup function for now.
+			<pre class="code-block">
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Set the text and line color, in this case black.</span>
+&nbsp;&nbsp;screen.stroke(0,0,0);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Draw a single dot on the screen</span>
+&nbsp;&nbsp;screen.point(screen.width()/2,&nbsp;screen.height()/2);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Draw a line on the screen. (X start, Y start, X Stop, Y Stop)</span>
+&nbsp;&nbsp;screen.line(10,&nbsp;100,&nbsp;100,&nbsp;10);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Draw a rectangle on the screen (X start, Y start, width, height)</span>
+&nbsp;&nbsp;screen.rect(20,&nbsp;20,&nbsp;40,&nbsp;60);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Draw a circle on the screen (X, Y, size)</span>
+&nbsp;&nbsp;screen.circle(80,&nbsp;80,&nbsp;40);</pre>
+
+			<li style="font-weight:bold; color: orange;">Writing Text</li>
+			This is always useful if you want to make a score counter....
+			<pre class="code-block">
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Set how big the text should be. 1 = 10 pixels, 2 = 20 pixels etc...</span>
+&nbsp;&nbsp;screen.setTextSize(1);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Write some text at position (X, Y)</span>
+&nbsp;&nbsp;screen.text(<span style="color: #006699;">"Hello World!"</span>, 10, 80);</pre>
+
+			<li style="font-weight:bold; color: orange;">Changing colors</li>
+			Because black and white is never enough, can you make the sky blue and the grass
+			green around your stick man?
+			<pre class="code-block">
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Set the background color. Do this first or you will cover everything up!</span>
+&nbsp;&nbsp;screen.background(0,0,255);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Set the colour of lines, and borders. Call this before line, point, circle or rect.</span>
+&nbsp;&nbsp;screen.stroke(255,&nbsp;50,&nbsp;100);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// And call this to remove the outlines and borders of the next shape you draw.</span>
+&nbsp;&nbsp;screen.noStroke();
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// This sets the fill colour of shapes. Call this before text, circle or rect.</span>
+&nbsp;&nbsp;screen.fill(100,&nbsp;100,&nbsp;200);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Can you guess what this does?</span>
+&nbsp;&nbsp;screen.noFill();</pre>
+
+			<li style="font-weight:bold; color: orange;">Moving Things</li>
+			Can you change something on your picture depending on if your button is pressed?
+			Remember to put this code in your loop function, you might want to create a new file
+			with the template for this bit as well.
+			Here is a clue to get you going....
+			<pre class="code-block">
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// This code moves a circle across the screen. Can you figure out how?</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">int</span> x = 0;
+&nbsp;&nbsp;<span style="color: #CC6600;">int</span> y = 0;
+&nbsp;&nbsp;<span style="color: #CC6600;">for</span>(y=0; y&lt;screen.height(); y++)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;screen.circle(x,&nbsp;y,&nbsp;10);
+&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;+=&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(100);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Can you make it change size as well? Can you make other shapes move?</span></pre>
+
+
+		</ul>
+	</p>
+	
+	<hr/>
+
+	<p>
+		<a id="etch"></a><div class="section-title">Etch-a-sketch!</div>
+		
+		<p>
+		Now, lets get building! The first thing you will need to do is to build the circuit for your 
+		shiney new digital etch-a-sketch. Follow the diagram below and look at the photo for a 
+		reference of what the finished one should look like.
+		</p>
+
+		<p>
+			<div class="img-inline-box" style="float:left; max-width: 48%;">
+				<img src="pictures/etch-a-sketch_bb.png" style="width:95%;"/>
+			</div>
+			<div class="img-inline-box" style="float:right; max-width: 48%;">
+				<img src="pictures/etch-a-sketch_photo.jpg" style="width:95%;"/>            
+			</div>
+		</p>
+
+		<p>
+		Okay, now we need some code! Your starting point is the template code for using the
+		screen from the previous section. So get started by copying that in. The full example is
+		shown below. See if you can work out what each piece of the code does. Brownie points
+		for being able to explain it!
+		</p>
+		
+		<pre class="code-block">
+<span style="color: #7E7E7E;">//&nbsp;These&nbsp;two&nbsp;files&nbsp;contain&nbsp;everything&nbsp;the&nbsp;arduino&nbsp;needs&nbsp;to&nbsp;talk&nbsp;to&nbsp;the&nbsp;screen.</span>
+#include&nbsp;&lt;<span style="color: #CC6600;">SPI</span>.h&gt;
+#include&nbsp;&lt;<span style="color: #CC6600;">TFT</span>.h&gt;
+
+<span style="color: #7E7E7E;">//&nbsp;These&nbsp;are&nbsp;the&nbsp;pins&nbsp;each&nbsp;of&nbsp;the&nbsp;knobs&nbsp;connect&nbsp;to</span>
+#define&nbsp;Horizontal_Input&nbsp;A5
+#define&nbsp;Vertical_Input&nbsp;A0
+
+<span style="color: #7E7E7E;">//&nbsp;create&nbsp;an&nbsp;instance&nbsp;of&nbsp;the&nbsp;screen</span>
+<span style="color: #CC6600;">TFT</span> screen = <span style="color: #CC6600;">TFT</span>(7, 0, 1);
+
+<span style="color: #7E7E7E;">//&nbsp;here&nbsp;is&nbsp;where&nbsp;we&nbsp;will&nbsp;store&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;cursor</span>
+<span style="color: #CC6600;">int</span> h_pos = 0;
+<span style="color: #CC6600;">int</span> v_pos = 0;
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>setup</b></span>() {
+&nbsp;&nbsp;screen.<span style="color: #CC6600;">begin</span>();
+&nbsp;&nbsp;screen.background(255,255,255);
+}
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>loop</b></span>() {
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// First, lets update where we think the cursor is</span>
+&nbsp;&nbsp;h_pos&nbsp;=&nbsp;<span style="color: #CC6600;">analogRead</span>(Horizontal_Input);
+&nbsp;&nbsp;v_pos&nbsp;=&nbsp;<span style="color: #CC6600;">analogRead</span>(Vertical_Input);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// What do you think these lines do? Have a look below</span>
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// the code to find out.</span>
+&nbsp;&nbsp;h_pos&nbsp;=&nbsp;<span style="color: #CC6600;">map</span>(h_pos, 0, 1023, 0, screen.width());
+&nbsp;&nbsp;v_pos&nbsp;=&nbsp;<span style="color: #CC6600;">map</span>(v_pos, 0, 1023, 0, screen.height());
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Now lets draw the dot where the cursor is:</span>
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// first set the color:</span>
+&nbsp;&nbsp;screen.stroke(255,0,0);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Now draw the point:</span>
+&nbsp;&nbsp;screen.point(h_pos,v_pos);
+}
+
+</pre>
+
+		<p>
+		If you manage to get it all working (which ofcourse you will) then have a go at customising it
+		a little. Can you change the colours? Can you make it draw red in the right half of the screen
+		and blue in the left half?
+		</p>
+
+		<p>
+			<b>Go Crazy!</b>
+		</p>
+
+	</p>
+
+	<hr/>
+
+	<p>
+		<a id="pong"></a><div class="section-title">Playing Pong!</div>
+
+		<p>
+		How about a game? We are going to build a replica of the first ever computer arcade
+		game, pong! This is a bit more complicated, but I reckon you can manage it. Again, first we
+		need to build the circuit, luckily. It is the same as the one for the etch-a-sketch. How
+		convinient!
+		</p>
+		
+		<p>
+			<div class="img-inline-box" style="float:left; max-width: 48%;">
+				<img src="pictures/pong_1.jpg" style="width:95%;"/>
+			</div>
+			<div class="img-inline-box" style="float:right; max-width: 48%;">
+				<img src="pictures/pong_2.jpg" style="width:95%;"/>            
+			</div>
+		</p>
+
+		<p>
+		There is a bit more code for pong, however if you understood the etch-a-sketch then this
+		should be no problem. Just copy it out first to get it working, then see if you can go through
+		it line by line to try and understand it. Please do ask if you want to try and explain it to us, or
+		if you would like us to explain it to you!
+		</p>
+
+		<pre class="code-block">
+<span style="color: #7E7E7E;">//&nbsp;These&nbsp;two&nbsp;files&nbsp;contain&nbsp;everything&nbsp;the&nbsp;arduino&nbsp;needs&nbsp;to&nbsp;talk&nbsp;to&nbsp;the&nbsp;screen.</span>
+#include&nbsp;&lt;<span style="color: #CC6600;">SPI</span>.h&gt;
+#include&nbsp;&lt;<span style="color: #CC6600;">TFT</span>.h&gt;
+
+<span style="color: #7E7E7E;">//&nbsp;These&nbsp;are&nbsp;the&nbsp;pins&nbsp;each&nbsp;of&nbsp;the&nbsp;knobs&nbsp;connect&nbsp;to</span>
+#define&nbsp;Horizontal_Input&nbsp;A5
+#define&nbsp;Vertical_Input&nbsp;A0
+
+<span style="color: #7E7E7E;">//&nbsp;create&nbsp;an&nbsp;instance&nbsp;of&nbsp;the&nbsp;screen</span>
+<span style="color: #CC6600;">TFT</span> screen = <span style="color: #CC6600;">TFT</span>(7, 0, 1);
+
+<span style="color: #7E7E7E;">//&nbsp;How&nbsp;big&nbsp;the&nbsp;paddels&nbsp;will&nbsp;be:</span>
+<span style="color: #CC6600;">int</span> bat_size = 20;
+<span style="color: #7E7E7E;">//&nbsp;here&nbsp;is&nbsp;where&nbsp;we&nbsp;will&nbsp;store&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;players</span>
+<span style="color: #CC6600;">int</span> p1_pos = 0;
+<span style="color: #CC6600;">int</span> p2_pos = 0;
+<span style="color: #7E7E7E;">//&nbsp;Store&nbsp;their&nbsp;previous&nbsp;positions&nbsp;too.&nbsp;You'll&nbsp;see&nbsp;why&nbsp;in&nbsp;a&nbsp;second...</span>
+<span style="color: #CC6600;">int</span> old_p1_pos = 0;
+<span style="color: #CC6600;">int</span> old_p2_pos = 0;
+<span style="color: #7E7E7E;">//&nbsp;Store&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;ball</span>
+<span style="color: #CC6600;">int</span> ball_x = screen.height()/4;
+<span style="color: #CC6600;">int</span> ball_y = screen.width()/2;
+<span style="color: #CC6600;">int</span> old_ball_x = screen.height()/2;
+<span style="color: #CC6600;">int</span> old_ball_y = screen.width()/2;
+
+<span style="color: #CC6600;">int</span> ball_speed_x = 1;
+<span style="color: #CC6600;">int</span> ball_speed_y = 1;
+
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>setup</b></span>() {
+&nbsp;&nbsp;screen.<span style="color: #CC6600;">begin</span>();
+&nbsp;&nbsp;screen.background(255,255,255);
+&nbsp;&nbsp;screen.setTextSize(2);
+}
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>loop</b></span>() {
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// First, lets update and draw where the player paddles are</span>
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Can you remember what these lines did from the last example?</span>
+&nbsp;&nbsp;p1_pos&nbsp;=&nbsp;<span style="color: #CC6600;">analogRead</span>(Horizontal_Input);
+&nbsp;&nbsp;p2_pos&nbsp;=&nbsp;<span style="color: #CC6600;">analogRead</span>(Vertical_Input);
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Why do we subtract 20 from the screen height?</span>
+&nbsp;&nbsp;p1_pos&nbsp;=&nbsp;<span style="color: #CC6600;">map</span>(p1_pos, 0, 1023, 0, screen.height()-20);
+&nbsp;&nbsp;p2_pos&nbsp;=&nbsp;<span style="color: #CC6600;">map</span>(p2_pos, 0, 1023, 0, screen.height()-20);
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Now lets draw the paddles.</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">if</span>(p1_pos != old_p1_pos || p2_pos != old_p2_pos)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;screen.fill(255,255,255);&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;screen.rect(3,&nbsp;old_p1_pos,&nbsp;3,&nbsp;bat_size);&nbsp;<span style="color: #7E7E7E;">// Player 1</span>
+&nbsp;&nbsp;&nbsp;&nbsp;screen.rect(154,&nbsp;old_p2_pos,&nbsp;3,&nbsp;bat_size);&nbsp;<span style="color: #7E7E7E;">// Player 1</span>
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Draw the player paddles</span>
+&nbsp;&nbsp;screen.fill(255,0,0);&nbsp;<span style="color: #7E7E7E;">// Player 1 paddle colour.</span>
+&nbsp;&nbsp;screen.rect(3,&nbsp;p1_pos,&nbsp;3,&nbsp;bat_size);&nbsp;<span style="color: #7E7E7E;">// Player 1</span>
+&nbsp;&nbsp;screen.fill(0,255,0);&nbsp;<span style="color: #7E7E7E;">// Player 2 paddle colour.</span>
+&nbsp;&nbsp;screen.rect(154,&nbsp;p2_pos,&nbsp;3,&nbsp;bat_size);&nbsp;<span style="color: #7E7E7E;">// Player 2</span>
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Draw the ball!</span>
+&nbsp;&nbsp;screen.fill(255,255,255);&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;screen.circle(old_ball_x,old_ball_y,3);&nbsp;<span style="color: #7E7E7E;">// erase the old ball</span>
+&nbsp;&nbsp;screen.fill(0,0,255);&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;screen.circle(ball_x,ball_y,3);&nbsp;<span style="color: #7E7E7E;">// draw the new one!</span>
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Now we need to deal with moving the ball and making sure that is</span>
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// bounces off the edges properly!</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">if</span>(ball_y &gt; screen.height() || ball_y &lt; 0) 
+&nbsp;&nbsp;{&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;ball_speed_y&nbsp;=&nbsp;-ball_speed_y;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// check if the ball has gone off the end of the screen</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">if</span>(ball_x &gt; screen.width()) 
+&nbsp;&nbsp;{&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;screen.stroke(0,0,0);
+&nbsp;&nbsp;&nbsp;&nbsp;screen.text(<span style="color: #006699;">" Player\n  One\n  Wins!"</span>,10,30);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(10000);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #CC6600;">else</span> <span style="color: #CC6600;">if</span> (ball_x &lt; 0) 
+&nbsp;&nbsp;{&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;screen.stroke(0,0,0);
+&nbsp;&nbsp;&nbsp;&nbsp;screen.text(<span style="color: #006699;">" Player\n  Two\n  Wins!"</span>,10,30);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(10000);
+&nbsp;&nbsp;}
+&nbsp;&nbsp;<span style="color: #CC6600;">else</span>
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">// Has it hit player one's bat?</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">if</span>(ball_x &lt; 4 &amp;&amp; ball_y &lt; p1_pos + bat_size &amp;&amp; ball_y &gt; p1_pos)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ball_speed_x&nbsp;=&nbsp;-ball_speed_x;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">// Has it hit player two's bat?</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">else</span> <span style="color: #CC6600;">if</span>(ball_x &gt; screen.width()-6 &amp;&amp; ball_y &lt; p2_pos + bat_size &amp;&amp; ball_y &gt; p2_pos)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ball_speed_x&nbsp;=&nbsp;-ball_speed_x;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Update the old positions</span>
+&nbsp;&nbsp;old_p1_pos&nbsp;=&nbsp;p1_pos;
+&nbsp;&nbsp;old_p2_pos&nbsp;=&nbsp;p2_pos;
+&nbsp;&nbsp;old_ball_x&nbsp;=&nbsp;ball_x;
+&nbsp;&nbsp;old_ball_y&nbsp;=&nbsp;ball_y;
+&nbsp;&nbsp;ball_x&nbsp;=&nbsp;ball_x&nbsp;+&nbsp;ball_speed_x;
+&nbsp;&nbsp;ball_y&nbsp;=&nbsp;ball_y&nbsp;+&nbsp;ball_speed_y;
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(10);
+}
+
+</pre>
+
+		<p>
+			Extra Challenges: Can you make a score counter? Can you make each block a different
+			color, say red and blue for each player? Change the shape of the ball?
+		</p>
+
+		<p>
+			Again, <b>Go Crazy!</b>
+		</p>
+	</p>
+
+	<hr/>
+		<b style="color:orange;">And Finally...</b>
+		<p>
+        Thank you for taking part in this workshop and using this tutorial! If
+        you would like some more information you can always get in touch with me
+        via email: <i>benmarshall@gmx.co.uk</i>. I am also on <a href="https://www.linkedin.com/pub/ben-marshall/5a/722/734" target="_blank">LinkedIn</a>.
+
+		</p>
+        <p>
+        If you are a teacher and would like to know how this workshop can be
+        adapted for use in classrooms and schools, contact me at <i>outreach@cssbristol.co.uk</i>. I am always happy to work with teachers in creating lesson
+        plans and helping with any and all technical aspects of the new
+        computing curriculum. You can freely download a PDF version <a href="Tutorial.pdf">here</a>
+        </p>
+        <p>
+        For more ideas, tutorials and materials, check out the <a target="_blank" href="http://arduino.cc">Arduino website</a>.
+        </p>
+
+	<hr/>
+
+	<p style="font-size: smaller; text-align: center;">
+		Written and Devised by Ben Marshall: benmarshall <i>at</i> gmx.co.uk<br/>
+		
+		<a href="http://bmarshall.org.uk">bmarshall.org.uk</a> | 
+		<a href="https://www.linkedin.com/pub/ben-marshall/5a/722/734" target="_blank">LinkedIn</a> <img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_in_20x15.png" width="20" height="15" alt="View Ben Marshall's LinkedIn profile" style="vertical-align:middle" border="0">
+	</p>
+
+</body>
+
+</html>
