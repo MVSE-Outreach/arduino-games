@@ -1,0 +1,13 @@
+# Site settings
+title: Arduino Games
+email: bm12656@my.bristol.ac.uk
+description: > # this means to ignore newlines until "baseurl:"
+    A tutorial written for the Digimakers project that teaches people how to
+    build simple arcade games using the Arduino platform, an LCD screen module
+    and other basic electronic components.
+baseurl: "" # the subpath of your site, e.g. /blog
+twitter_username: digi_makers
+github_username:  MVSE-Outreach
+
+# Build settings
+markdown: kramdown
