@@ -51,3 +51,26 @@ $on-laptop:        800px;
         "layout",
         "syntax-highlighting"
 ;
+
+// -- Normal person CSS starts here.
+
+.section{
+    margin-top:     10px;
+    margin-bottom:  10px;
+    padding-top:    5px;
+    padding-bottom: 5px;
+    border-bottom:  1px solid silver;
+}
+
+.site-header{
+    background-color: #11BFDA;
+    border-bottom:    1px solid black;
+}
+
+.site-title{
+    color:            white;
+    font-weight:    bolder;
+}
+.site-title:visited{
+    color:            white;
+}
