@@ -2,3 +2,6 @@ Arduino IDE/
 
 *.swp
 *~
+_site
+.sass-cache
+.jekyll-metadata
