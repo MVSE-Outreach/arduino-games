@@ -42,17 +42,55 @@ the right place!
 <div class="section">
 <p>
 To check we have connected the screen properly, lets run a small "Hello
-World!" program. Open up your Arduino software, and open the example
-under "<i></i>"
-</p>
+World!" program. Open up your Arduino software, and use the code supplied
+below to check it works.</p>
 
-<div style="text-align:center; max-width:735px;">
+<div style="text-align:left; max-width:735px;">
 <img src="images/ide-top.png"/>
 {% highlight C linenos %}
 
-// Code Goes Here
-//
-// Example hello world text on the screen.
+#include <TFT.h>  // Arduino LCD library
+#include <SPI.h>
+
+// pins to control the screen 
+#define CS   7
+#define DC   0
+#define RST  1
+
+// create an instance of the library
+TFT TFTscreen = TFT(CS, DC, RST);
+
+// Use this to count upwards forever.
+int counter = 0;
+
+void setup() {
+
+// Put this line at the beginning of every sketch that uses the GLCD:
+TFTscreen.begin();
+
+// clear the screen with a white background
+TFTscreen.background(255,255,255);
+
+// set the font color to black
+TFTscreen.stroke(0, 0, 0);
+// set the font size
+TFTscreen.setTextSize(2);
+// ste the font size very large for the loop
+TFTscreen.setTextSize(5);
+}
+
+void loop() {
+// Write hello world to the screen.
+TFTscreen.text("Hello World!", 1, 20);
+
+// Print out the counter number.
+TFTscreen.text(String(counter), 40);
+
+// wait for a moment then loop back round.
+delay(250);
+counter = counter + 1;
+}
+
 
 {% endhighlight %}
 <img src="images/ide-bottom.png"/>
