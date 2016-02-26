@@ -24,7 +24,7 @@ around the screen so you can press them easily later.
 </p>
 
 <p>
-Diagram Here.
+<img src="images/circuit_button.png" style="max-width:735px;"/>
 </p>
 
 <p>
@@ -33,11 +33,11 @@ along side the code from your screen. First though, lets try doing something
 really simple like blinking a light when you press the button.
 </p>
 
-<div style="text-align:center; max-width:735px;">
+<div style="text-align:left; max-width:735px;">
 <img src="images/ide-top.png"/>
 {% highlight C linenos %}
 
-// Code For Button Goes Here
+{% include_relative arduino-src/buttons/buttons.ino %}
 
 {% endhighlight %}
 <img src="images/ide-bottom.png"/>
@@ -60,7 +60,7 @@ you fit it around the screen too?
 </p>
 
 <p>
-Diagram Here.
+<img src="images/circuit_dial.png" style="max-width:735px;"/>
 </p>
 
 <p>
@@ -72,11 +72,11 @@ on the position of the dial. Can you make the rectangle move differently if the
 button is pressed as well? What about changing the shape?
 </p>
 
-<div style="text-align:center; max-width:735px;">
+<div style="text-align:left; max-width:735px;">
 <img src="images/ide-top.png"/>
 {% highlight C linenos %}
 
-// Code For Dial Goes Here
+{% include_relative arduino-src/dials/dials.ino %}
 
 {% endhighlight %}
 <img src="images/ide-bottom.png"/>
