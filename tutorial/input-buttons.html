@@ -3,3 +3,95 @@ layout: default
 title: Buttons And Inputs
 ---
 
+<h1>Pushing Buttons</h1>
+
+<p>
+Now we know how to use the screen, we need to make it more interractive. This
+section will show you how to connect buttons and dials to your Arduino, and
+use code to <i>read</i> a value from them.
+</p>
+
+<hr/><br/>
+
+<h2>Adding A Button</h2>
+<div class="section">
+<p>
+Let's start simple. We can really easily connect a button to our arduino
+using only two wires and a little code. The diagram below shows how you can
+do this. You'll notice that the diagram doesn't include the screen. That's
+just to make things clearer, you'll have to work out how to fit the buttons
+around the screen so you can press them easily later.
+</p>
+
+<p>
+Diagram Here.
+</p>
+
+<p>
+With the circuit all wired up, you can start coding. The code below can be used
+along side the code from your screen. First though, lets try doing something
+really simple like blinking a light when you press the button.
+</p>
+
+<div style="text-align:center; max-width:735px;">
+<img src="images/ide-top.png"/>
+{% highlight C linenos %}
+
+// Code For Button Goes Here
+
+{% endhighlight %}
+<img src="images/ide-bottom.png"/>
+</div><br/>
+
+<p>
+You should see that whenever you press the button, the light turns on! Not very
+exciting, but think about how we can use this code to build our games? Can
+you make something move on your screen based on button presses?
+</p>
+</div>
+
+<h2>Adding A Dial</h2>
+<div class="section">
+<p>
+Buttons are great and all, but what about something twisty? Dials can be used
+move characters, change speed, steer and all sorts of things. They are nice and
+simple to wire up too. Again, the wiring diagram below only shows the dial, can
+you fit it around the screen too?
+</p>
+
+<p>
+Diagram Here.
+</p>
+
+<p>
+Now we have everything wired up, lets make something on our screen change
+based on our dial. When we read a value from the dial, we get a number
+between 0 and 1023. We can use this as a position, or even a colour. The
+code below will move a square up and down, and also change it's colour, based
+on the position of the dial. Can you make the rectangle move differently if the
+button is pressed as well? What about changing the shape?
+</p>
+
+<div style="text-align:center; max-width:735px;">
+<img src="images/ide-top.png"/>
+{% highlight C linenos %}
+
+// Code For Dial Goes Here
+
+{% endhighlight %}
+<img src="images/ide-bottom.png"/>
+</div><br/>
+
+<p>
+Congratulations! Now you know everything you need in order to start making
+some awesome arcade games. The next section will show you how to build 
+the classic <i>ping pong</i>, and give you some ideas about other games you
+could try.
+</p>
+
+</div>
+<br/>
+<p style="text-align:center; font-weight:bolder; font-size:x-large;">
+<a href="/using-the-screen">&lt; Using The Screen</a> | 
+<a href="/ping-pong">Ping Pong &gt;</a>
+</p>
