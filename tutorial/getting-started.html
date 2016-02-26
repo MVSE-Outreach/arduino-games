@@ -55,6 +55,33 @@ code already inserted. You can now click on the <i>Upload</i> button in
 the <b>Sketch</b> menu, or, for wizz-kids, press <i>Ctrl-U</i>.
 </p>
 <p>
+
+<div style="text-align:left; max-width:735px;">
+<img src="images/ide-top.png"/>
+{% highlight C linenos %}
+
+// the setup function runs once when you press reset or power the board
+void setup() {
+    // set digital pin 13 as an output.
+    pinMode(13, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+    digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(1000);              // wait for a second
+
+    digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
+    delay(1000);              // wait for a second
+
+    // Automatically loop back to the beginning of the loop() function.
+}
+
+{% endhighlight %}
+<img src="images/ide-bottom.png"/>
+</div><br/>
+
+<p>
 Some text should fly past a the bottom of your Arduino IDE window, the last
 line of which will be "Upload Complete!". The yellow LED on your Arduino
 should now be flashing!
