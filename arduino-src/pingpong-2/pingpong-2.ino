@@ -25,36 +25,6 @@ int score_p2;
 int position_p1;
 int position_p2;
 
-void setup() {
-
-    // Set up the screen.
-    screen.begin();
-    screen.background(255,255,255);
-    screen.fill(255,255,255);
-    screen.stroke(0, 0, 0);
-    screen.setTextSize(1);
-
-    // Set up the player scores and bat positions.
-    score_p1    = 0;
-    score_p2    = 0;
-    position_p1 = 0;
-    position_p2 = 0;
-}
-
-void loop() {
-
-    // Move the "getPlayerPositions()" function call into the
-    // new drawPlayerBats() function. Can you figure out why?
-
-    // Draw the player scores.
-    drawPlayerScores();
-
-    // Draw the bats using the positions we read a moment ago.
-    drawPlayerBats();
-
-    delay(500);
-}
-
 void drawPlayerBats()
 {
     // Draw player 1's bat. First, clear the old area the bat took up.
@@ -70,8 +40,7 @@ void drawPlayerBats()
 
     // Now we can draw the new bats
     // Draw player 1's bat first.
-    screen.fill(255,255,255);
-    screen.stroke(0,255,0);     // Make player 1's bat green.
+    screen.fill(0,255,0); // Make player 1's bat green.
     screen.rect(1,position_p1,bat_w,bat_h);
 
     // Now draw player 2's bat. Remember, it needs to be on the other side
@@ -104,3 +73,34 @@ void getPlayerPositions(){
     // Read player 2 position
     // ....
 }
+
+void setup() {
+
+    // Set up the screen.
+    screen.begin();
+    screen.background(255,255,255);
+    screen.fill(255,255,255);
+    screen.stroke(0, 0, 0);
+    screen.setTextSize(1);
+
+    // Set up the player scores and bat positions.
+    score_p1    = 0;
+    score_p2    = 0;
+    position_p1 = 0;
+    position_p2 = 0;
+}
+
+void loop() {
+
+    // Move the "getPlayerPositions()" function call into the
+    // new drawPlayerBats() function. Can you figure out why?
+
+    // Draw the player scores.
+    drawPlayerScores();
+
+    // Draw the bats using the positions we read a moment ago.
+    drawPlayerBats();
+
+    delay(500);
+}
+

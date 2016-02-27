@@ -126,23 +126,29 @@ out where to put it in your code?
 
 void startCountdown()
 {
-    int countdown = 3;
+    int countdown = 4;
+    // Make the text size nice and big.
+    screen.setTextSize(3);
 
     while(countdown > 0){
         countdown = countdown - 1;
         
         // Make a string to show the score.
-        char toPrint[1];
-        String(countdown).toCharArray(toPrint,1);
+        char toPrint[2];
+        String(countdown).toCharArray(toPrint,2);
 
-        // Show the text.
-        // ....
+        // screen.stroke ....... text colour
+        // screen.text   ....... what to show and where
         
         delay(1000);    // Wait for one thousand milliseconds / one second.
 
-        // Rub out the text for next time so we don't just draw over it.
-        // Didn't we do something similar for the scores? Can you hack it?
+        // Rub out the old text. Didn't we do something like this before?
+        // screen.stroke .......
+        // screen.fill .......
+        // screen.rect .......
     }
+    // Put the text size back to normal.
+    screen.setTextSize(1);
 }
 
 {% endhighlight %}
@@ -172,18 +178,16 @@ void checkVictory()
         // Make the font size nice and big.
         screen.setTextSize(2);
 
-        // The message to print.
-        char message[] = "Player 1 Wins!";
-
         // Print the message.
-        screen.text(message, 5,10);
+        screen.stroke(0,0,0);
+        screen.text("Player 1 Wins!", 5,10);
 
         // Wait for a few seconds.
         delay (5000);
     }
     else if(score_p2 >= 3)
     {
-        // ......
+        // .......
     }
 
     // What shall we do now if someone has one? Can we call one function to

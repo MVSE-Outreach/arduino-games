@@ -60,36 +60,6 @@ void startCountdown()
     screen.setTextSize(1);
 }
 
-void setup() {
-
-    // Set up the screen.
-    screen.begin();
-    screen.background(255,255,255);
-    screen.fill(255,255,255);
-    screen.stroke(0, 0, 0);
-    screen.setTextSize(1);
-    
-    screen_w = screen.width();
-    screen_h = screen.height();
-
-    // Set up the player scores and bat positions.
-    score_p1    = 0;
-    score_p2    = 0;
-    position_p1 = 0;
-    position_p2 = 0;
-
-    // Set up the ball position and direction of travel.
-    ball_pos_x  = screen_w/2;
-    ball_pos_y  = screen_h/2;
-    ball_dir_x  = ball_speed;
-    ball_dir_y  = ball_speed;
-
-    // Run the startup countdown.
-    drawPlayerScores();
-    drawPlayerBats();
-    startCountdown();
-}
-
 void updateBall()
 {
     // First, rub out the previous ball we drew.
@@ -201,6 +171,7 @@ void drawPlayerScores()
 
 void getPlayerPositions(){
     // Read player 1 position
+    // What do you think the map function does?
     position_p1 = map(analogRead(PIN_P1_BAT),0,1023-bat_h,0,screen_h);
     
     // Read player 2 position
@@ -234,6 +205,37 @@ void checkVictory()
     // What shall we do now if someone has one? Can we call one function to
     // go back to the beginning again?
 }
+
+void setup() {
+
+    // Set up the screen.
+    screen.begin();
+    screen.background(255,255,255);
+    screen.fill(255,255,255);
+    screen.stroke(0, 0, 0);
+    screen.setTextSize(1);
+    
+    screen_w = screen.width();
+    screen_h = screen.height();
+
+    // Set up the player scores and bat positions.
+    score_p1    = 0;
+    score_p2    = 0;
+    position_p1 = 0;
+    position_p2 = 0;
+
+    // Set up the ball position and direction of travel.
+    ball_pos_x  = screen_w/2;
+    ball_pos_y  = screen_h/2;
+    ball_dir_x  = ball_speed;
+    ball_dir_y  = ball_speed;
+
+    // Run the startup countdown.
+    drawPlayerScores();
+    drawPlayerBats();
+    startCountdown();
+}
+
 
 void loop() {
 
