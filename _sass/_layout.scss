@@ -2,9 +2,11 @@
  * Site header
  */
 .site-header {
-    border-top: 5px solid $grey-color-dark;
+    border-top: 5px solid $red-color;
     border-bottom: 1px solid $grey-color-light;
     min-height: 56px;
+
+    background: url('http://www.digimakers.co.uk/digi-core/themes/dm-child/images/DM-Header-1600x240.jpg') repeat-x top left !important;
 
     // Positioning context for the mobile navigation icon
     position: relative;
