@@ -32,6 +32,13 @@ game.
 <li>Winning!</li>
 </ol>
 </div>
+<p>
+Don't worry if you get stuck. The workshop helpers will be happy to lend a
+hand. You can also take a quick peek at the finished code
+<a target="_blank"
+href="{{site.baseurl}}/arduino-src/pingpong-complete/pingpong-complete.ino">
+here</a> if you are really stuck.
+</p>
 
 <h2>Keeping Score</h2>
 <div class="section">
@@ -41,9 +48,14 @@ read inputs from both players individually. Below is some example code with
 small bits missing, can you fill them in so we can read the position of the
 bats properly and display each players score?
 </p>
-<p>
-Example Code
-</p>
+
+<div style="text-align:left; max-width:735px;">
+<img src="images/ide-top.png"/>
+{% highlight C linenos %}
+{% include_relative arduino-src/pingpong-1/pingpong-1.ino %}
+{% endhighlight %}
+<img src="images/ide-bottom.png"/>
+</div><br/>
 
 <p>
 Got it working? This code will form the skeleton of our game, so all of the
@@ -55,8 +67,18 @@ other code will be <b>added</b> to what we have already written.
 <h2>Player Bats</h2>
 <div class="section">
 <p>
-How the player bats will work.
+So, we can draw the player scores, and read where the bats <i>should</i> be.
+But we don't draw the bats! Let's add a function that uses the positions we
+read in the previous step to draw them in.
 </p>
+
+<div style="text-align:left; max-width:735px;">
+<img src="images/ide-top.png"/>
+{% highlight C linenos %}
+{% include_relative arduino-src/pingpong-2/pingpong-2.ino %}
+{% endhighlight %}
+<img src="images/ide-bottom.png"/>
+</div><br/>
 
 </div>
 
@@ -64,7 +86,26 @@ How the player bats will work.
 <h2>Moving The Ball</h2>
 <div class="section">
 <p>
-How the ball will move and keeping track of collisions.
+Ping pong is no fun without the ball! We need to keep track of the position
+of the ball, it's speed, direction, whether it has collided with a wall, or
+a bat, and keep score. Phew, that's a lot! Remember though, we are
+<i>dividing</i> <b>and</b> <i>conquering</i> this problem, so we can add the
+code in small steps. In fact, we can even add it all in a single function!
+Have a look at lines 75 to 130 and try to work out which bits need adding.
+</p>
+
+<div style="text-align:left; max-width:735px;">
+<img src="images/ide-top.png"/>
+{% highlight C linenos %}
+{% include_relative arduino-src/pingpong-3/pingpong-3.ino %}
+{% endhighlight %}
+<img src="images/ide-bottom.png"/>
+</div><br/>
+
+<p>
+Now, we are nearly there! We have the ball, the bats and a score counter. Now
+we just need to add a couple of functions to make starting and finishing the
+game a bit easier.
 </p>
 
 </div>
@@ -73,19 +114,105 @@ How the ball will move and keeping track of collisions.
 <h2>Winning!</h2>
 <div class="section">
 <p>
-How we check for victory.
+So, at the moment, we are just thrust straight into the game and don't get any
+chance to get ready! Let's add a little count down to the start. There is
+some code below that displays a little count down from three. Can you work
+out where to put it in your code?
 </p>
+
+<div style="text-align:left; max-width:735px;">
+<img src="images/ide-top.png"/>
+{% highlight C linenos %}
+
+void startCountdown()
+{
+    int countdown = 3;
+
+    while(countdown > 0){
+        countdown = countdown - 1;
+        
+        // Make a string to show the score.
+        char toPrint[1];
+        String(countdown).toCharArray(toPrint,1);
+
+        // Show the text.
+        // ....
+        
+        delay(1000);    // Wait for one thousand milliseconds / one second.
+
+        // Rub out the text for next time so we don't just draw over it.
+        // Didn't we do something similar for the scores? Can you hack it?
+    }
+}
+
+{% endhighlight %}
+<img src="images/ide-bottom.png"/>
+</div><br/>
+
+<p>
+It might be nice to have this count down after each time someone scores. Can
+you make that happen by adding only two more lines of code?
+</p>
+
+<p>
+So, we can start the game nicely now, and play as well. We just need some sort
+of victory condition. Let's add one last function that checks if someone has
+won (first to score three maybe?) and show a message when they do. Again, can
+you work out where to put this function, and call it in you code?
+</p>
+
+<div style="text-align:left; max-width:735px;">
+<img src="images/ide-top.png"/>
+{% highlight C linenos %}
+
+void checkVictory()
+{
+    if(score_p1 >= 3)
+    {
+        // Make the font size nice and big.
+        screen.setTextSize(2);
+
+        // The message to print.
+        char message[] = "Player 1 Wins!";
+
+        // Print the message.
+        screen.text(message, 5,10);
+
+        // Wait for a few seconds.
+        delay (5000);
+    }
+    else if(score_p2 >= 3)
+    {
+        // ......
+    }
+
+    // What shall we do now if someone has one? Can we call one function to
+    // go back to the beginning again?
+}
+
+{% endhighlight %}
+<img src="images/ide-bottom.png"/>
+</div><br/>
+
 
 </div>
 
 <h2>The Finished Product</h2>
 <div class="section">
 <p>
-Picture of the finished thing.
+Congratulations! You've built your own Ping Pong game!
 </p>
 
 <p>
-Extra Suggestions. New games and modifications for this one.
+Since you found that so easy, can you make it better? How about using the
+buttons some how? Perhaps you think the colours are boring, or maybe you want
+to make another game entirely. This tutorial has told you everything you need
+to make awesome arcade games using the Arduino, so get hacking!
+</p>
+<p>
+Be sure to post a picture of your creations to 
+<a href="https://www.facebook.com/digimakersbristol">our Facebook page</a>
+as well!
 </p>
 </div>
 
