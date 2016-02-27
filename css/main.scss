@@ -76,6 +76,8 @@ img{
 .site-title{
     color:          $red-color;
     font-weight:    bolder;
+    text-shadow:    1px 1px $grey-color;
+    font-size:      xx-large;
 }
 .site-title:visited{
     color:          $red-color;
